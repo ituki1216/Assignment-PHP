@@ -1,27 +1,49 @@
-<?php
-function render_calendar($month, $year) {
-    $monthDays = cal_days_in_month(CAL_GREGORIAN, $month, $year);
-    $firstDayOfWeek = date('w', strtotime("$year-$month-01"));
+<!DOCTYPE html>
+<html lang="ja">
 
-    echo "<table class='calendar-table' border='1'>";
-    echo "<tr>";
-    $days = ["日", "月", "火", "水", "木", "金", "土"];
-    foreach ($days as $day) {
-        echo "<th>$day</th>";
-    }
-    echo "</tr>";
-
-    echo "<tr>";
-    for ($i = 0; $i < $firstDayOfWeek; $i++) {
-        echo "<td></td>";
-    }
-
-    for ($day = 1; $day <= $monthDays; $day++) {
-        echo "<td>$day</td>";
-        if (($day + $firstDayOfWeek) % 7 == 0) {
-            echo "</tr><tr>";
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>月送りカレンダー</title>
+    <style>
+        .calendar-table {
+            width: 100%;
+            border-collapse: collapse;
         }
-    }
-    echo "</tr></table>";
-}
-?>
+        .calendar-table th, .calendar-table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        .calendar-table th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>
+            <a href="?ym=<?php echo date('Y-m', strtotime('-1 month')); ?>">&lt;</a>
+            <?php echo date('Y年n月'); ?>
+            <a href="?ym=<?php echo date('Y-m', strtotime('+1 month')); ?>">&gt;</a>
+        </h2>
+
+        <?php
+        // カレンダー表示用のPHPをインクルード
+        include 'app.php';
+        
+        // 現在の月と年を取得
+        $month = date('n'); 
+        $year = date('Y'); 
+
+        // カレンダー表示
+        render_calendar($month, $year);
+        ?>
+    </div>
+</body>
+
+</html>
+
+
+http://localhost:8080/calendar/index.php
