@@ -1,31 +1,27 @@
-<!DOCTYPE html>
-<html lang="ja">
+<?php
+function render_calendar($month, $year) {
+    $monthDays = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+    $firstDayOfWeek = date('w', strtotime("$year-$month-01"));
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>月送りカレンダー</title>							
-</head>
+    echo "<table class='calendar-table' border='1'>";
+    echo "<tr>";
+    $days = ["日", "月", "火", "水", "木", "金", "土"];
+    foreach ($days as $day) {
+        echo "<th>$day</th>";
+    }
+    echo "</tr>";
 
-<body>
-  <div class="container"> 
-    <h2>
-      <a href="?ym=<?php echo $prev; ?>">&lt;</a> 
-      <?php echo $calendar; ?>
-      <a href="?ym=<?php echo $next; ?>">&gt;</a> 
-    </h2>
+    echo "<tr>";
+    for ($i = 0; $i < $firstDayOfWeek; $i++) {
+        echo "<td></td>";
+    }
 
-    <?php
-      // カレンダー表示用のphpをインクルード
-      include 'app.php';
-      
-      // 現在の都市と月を取得
-      $month = date('n'); 
-      $year = date('y');
-
-      // カレンダー表示
-      render_calendar($month, $year);
-    ?>
-  </div>
-</body>
-</html>
+    for ($day = 1; $day <= $monthDays; $day++) {
+        echo "<td>$day</td>";
+        if (($day + $firstDayOfWeek) % 7 == 0) {
+            echo "</tr><tr>";
+        }
+    }
+    echo "</tr></table>";
+}
+?>
