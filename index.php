@@ -19,3 +19,20 @@
             background-color: #f2f2f2;
         }
     </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <h2>
+            <!-- 前月のリンク -->
+            <a href="?ym=<?php 
+                // 前月のリンク作成
+                $currentMonth = isset($_GET['ym']) ? $_GET['ym'] : date('Y-m');
+                echo date('Y-m', strtotime('-1 month', strtotime($currentMonth))); 
+            ?>">&lt;</a>
+            
+            <!-- 現在の年月を表示 -->
+            <?php
+            // 現在の月と年をGETパラメータで取得（無ければデフォルトで現在の年月）
+            $currentMonth = isset($_GET['ym']) ? $_GET['ym'] : date('Y-m'); 
