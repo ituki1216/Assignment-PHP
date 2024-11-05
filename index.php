@@ -40,3 +40,23 @@
             // 年月表示
             echo date('Y年n月', strtotime($currentMonth));
             ?>
+            <!-- 次月のリンク -->
+            <a href="?ym=<?php 
+                // 次月のリンク作成
+                echo date('Y-m', strtotime('+1 month', strtotime($currentMonth))); 
+            ?>">&gt;</a>
+        </h2>
+
+        <?php
+        // 月と年を抽出
+        list($year, $month) = explode('-', $currentMonth);
+
+        include 'app.php';
+        
+        // カレンダー表示
+        render_calendar($month, $year);
+        ?>
+    </div>
+</body>
+
+</html>
