@@ -36,3 +36,7 @@
             <?php
             // 現在の月と年をGETパラメータで取得（無ければデフォルトで現在の年月）
             $currentMonth = isset($_GET['ym']) ? $_GET['ym'] : date('Y-m'); 
+
+            // 年月表示
+            echo date('Y年n月', strtotime($currentMonth));
+            ?>
