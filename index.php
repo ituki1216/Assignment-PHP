@@ -51,7 +51,7 @@
         // 月と年を抽出
         list($year, $month) = explode('-', $currentMonth);
 
-        include 'app.php';
+        include 'app.php'
         
         // カレンダー表示
         render_calendar($month, $year);
