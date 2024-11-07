@@ -25,18 +25,14 @@
 <body>
     <div class="container">
         <h2>
-            <!-- 前月のリンク -->
             <a href="?ym=<?php 
-                // 前月のリンク作成
                 $currentMonth = isset($_GET['ym']) ? $_GET['ym'] : date('Y-m');
                 echo date('Y-m', strtotime('-1 month', strtotime($currentMonth))); 
             ?>">&lt;</a>
             
-            <!-- 現在の年月を表示 -->
             <?php
             $currentMonth = isset($_GET['ym']) ? $_GET['ym'] : date('Y-m'); 
 
-            // 年月表示
             echo date('Y年n月', strtotime($currentMonth));
             ?>
             <a href="?ym=<?php 
@@ -45,12 +41,10 @@
         </h2>
 
         <?php
-        // 月と年を抽出
         list($year, $month) = explode('-', $currentMonth);
 
         include 'app.php';
         
-        // カレンダー表示
         render_calendar($month, $year);
         ?>
     </div>
