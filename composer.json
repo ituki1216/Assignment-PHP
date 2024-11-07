@@ -1,0 +1,8 @@
+{
+    "name": "app.php",
+    "description": "calendar application",
+    "type": "project",
+    "require": {
+      "php": "8.2.12"
+    }
+  }
